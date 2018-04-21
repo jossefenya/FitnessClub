@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1524229575 source:/home/jossy/C++/Fitness/main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<fstream>
+
