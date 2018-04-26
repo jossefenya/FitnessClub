@@ -174,12 +174,13 @@ class Train{
 private:
     int id_train;
     string type = "Train";
-    string usefull = "Yes";
+    string usefull;
 public:
     Train(){}
 
-    Train(int id_train1){
+    Train(int id_train1, string usefull1){
         id_train = id_train1;
+        usefull = usefull1;
     }
 
     ~Train(){}
@@ -273,7 +274,7 @@ void addInfoAboutIns(vector<Human*> &humans){
     cout << endl << "Адрес: ";
     cin.get();
     getline(cin, address);
-    cout << "Зарплата: ";
+    cout << endl << "Зарплата: ";
     cin >> salary;
     humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
     system("clear");
@@ -318,11 +319,11 @@ void addInfoAboutVis(vector<Human*> &humans){
 
 void addInfoAboutTrain(vector<Train*> &trains){
     int id_train = 0;
-    string usefull;
+    string usefull = "Yes";
     cout << "Введите данные" << endl;
     cout << "ID тренажёра: ";
     cin >> id_train;
-    trains.push_back(new Train(id_train));
+    trains.push_back(new Train(id_train, usefull));
     system("clear");
 }
 
@@ -607,15 +608,14 @@ void writeInfoInFile(vector<Train*> &trains, vector<Human*> &humans){
     }
     ofstream fout("train.txt", ios_base::app);
     for (int i = trains.size() - 1; i < trains.size(); i++){
-         fout << endl << trains[i]->getId() << endl << trains[i]->getUsefull() << endl;
+         fout << trains[i]->getId() << endl << trains[i]->getUsefull() << endl;
     }
     fout.close();
 }
 
-void readInfoFromFile(vector<Train*> &trains, vector<Human*> &humans, int &count_of_adm, int &count_of_ins, int &count_of_vis, int &count_of_train){
-    /*ifstream fin("admin.txt");
+void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int &count_of_ins, int &count_of_vis){
     int id = 0;
-    int64_t salary;
+    int64_t salary = 0;
     string first_name;
     string name;
     string second_name;
@@ -626,73 +626,129 @@ void readInfoFromFile(vector<Train*> &trains, vector<Human*> &humans, int &count
     int age;
     int64_t phone_number;
     string address;
-    while (!fin.eof()){
-        fin.get();
-        fin >> id;
-        fin.get();
-        getline(fin, first_name);
-        getline(fin, name);
-        getline(fin, second_name);
-        fin >> birthday;
-        fin >> month_of_birthday;
-        fin >> year_of_birthday;
-        fin.get();
-        getline(fin, sex);
-        fin >> age;
-        fin >> phone_number;
-        fin.get();
-        getline(fin, address);
-        fin.get();
-        fin >> salary;
-        humans.push_back(new Administrator(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
-        count_of_adm++;
-    }
-    fin.close();*/
-   /* ifstream fin1("instruct.txt");
-    while (!fin1.eof()){
-        fin1.get();
-        fin1 >> id;
-        fin1.get();
-        getline(fin1, first_name);
-        getline(fin1, name);
-        getline(fin1, second_name);
-        fin1 >> birthday;
-        fin1 >> month_of_birthday;
-        fin1 >> year_of_birthday;
-        fin1.get();
-        getline(fin1, sex);
-        fin1 >> age;
-        fin1 >> phone_number;
-        fin1.get();
-        getline(fin1, address);
-        fin1.get();
-        fin1 >> salary;
-        humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
-        count_of_ins++;
-    }
+    fstream file("admin.txt");
+    ifstream fin("admin.txt");
+    if (file.peek() != EOF)
+        while(!fin.eof()){
+                fin >> id;
+                fin >> first_name;
+                fin >> name;
+                fin >> second_name;
+                fin >> birthday;
+                fin >> month_of_birthday;
+                fin >> year_of_birthday;
+                fin >> sex;
+                fin >> age;
+                fin >> phone_number;
+                fin >> address;
+                fin >> salary;
+                fin.get();
+                fin.get();
+                humans.push_back(new Administrator(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
+                count_of_adm++;
+            }
+    fin.close();
+    file.close();
+    ifstream fin1("instruct.txt");
+    fstream file1("instruct.txt");
+    if (file1.peek() != EOF)
+        while (!fin1.eof()){
+            fin1 >> id;
+            fin1 >> first_name;
+            fin1 >> name;
+            fin1 >> second_name;
+            fin1 >> birthday;
+            fin1 >> month_of_birthday;
+            fin1 >> year_of_birthday;
+            fin1 >> sex;
+            fin1 >> age;
+            fin1 >> phone_number;
+            fin1 >> address;
+            fin1 >> salary ;
+            fin1.get();
+            fin1.get();
+            humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
+            count_of_ins++;
+        }
     fin1.close();
+    file1.close();
     ifstream fin2("visit.txt");
-    while (!fin2.eof()){
-        fin2.get();
-        fin2 >> id;
-        fin2.get();
-        getline(fin2, first_name);
-        getline(fin2, name);
-        getline(fin2, second_name);
-        fin2 >> birthday;
-        fin2 >> month_of_birthday;
-        fin2 >> year_of_birthday;
-        fin2.get();
-        getline(fin2, sex);
-        fin2 >> age;
-        fin2 >> phone_number;
-        fin2.get();
-        getline(fin2, address);
-        fin2 >> salary;
-        humans.push_back(new Visitor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address));
-        count_of_vis++;
+    fstream file2("visit.txt");
+    if (file2.peek() != EOF)
+        while (!fin2.eof()){
+            fin2 >> id;
+            fin2 >> first_name;
+            fin2 >> name;
+            fin2 >> second_name;
+            fin2 >> birthday;
+            fin2 >> month_of_birthday;
+            fin2 >> year_of_birthday;
+            fin2 >> sex;
+            fin2 >> age;
+            fin2 >> phone_number;
+            fin2 >> address;
+            fin2.get();
+            fin2.get();
+            humans.push_back(new Visitor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address));
+            count_of_vis++;
+        }
+    fin2.close();
+    file2.close();
+}
+
+void readInfoFromFileAboutTrains(vector<Train*> &trains, int& count_of_train){
+    fstream file3("train.txt");
+    ifstream fin3("train.txt");
+    string usefull;
+    int id_train;
+    if (file3.peek() != EOF)
+        while (!fin3.eof()){
+            fin3 >> id_train;
+            fin3 >> usefull;
+            fin3.get();
+            fin3.get();
+            trains.push_back(new Train(id_train, usefull));
+            count_of_train++;
+        }
+    file3.close();
+    fin3.close();
+}
+
+void reWriteInfoInFile(vector<Train*>& trains, vector<Human*>& humans){
+    ofstream fout("admin.txt");
+    for (int i = 0; i < humans.size(); i++){
+        if (humans[i]->getType() == "Administrator")
+            fout << humans[i]->getId() << endl << humans[i]->getFirstName() << endl << humans[i]->getName() << endl
+            << humans[i]->getSecondName() << endl << humans[i]->getBirthday() << endl << humans[i]->getMonth() << endl
+            << humans[i]->getYear() << endl << humans[i]->getSex() << endl << humans[i]->getAge() << endl
+            << humans[i]->getPhone() << endl << humans[i]->getAdr() << endl << humans[i]->getSalary() << endl;
     }
-    fin2.close();*/
+    fout.close();
+
+    ofstream fout1("instruct.txt");
+    for (int i = 0; i < humans.size(); i++){
+        if (humans[i]->getType() == "Instructor")
+            fout1 << humans[i]->getId() << endl << humans[i]->getFirstName() << endl << humans[i]->getName() << endl
+            << humans[i]->getSecondName() << endl << humans[i]->getBirthday() << endl << humans[i]->getMonth() << endl
+            << humans[i]->getYear() << endl << humans[i]->getSex() << endl << humans[i]->getAge() << endl
+            << humans[i]->getPhone() << endl << humans[i]->getAdr() << endl << humans[i]->getSalary() << endl;
+    }
+    fout1.close();
+
+    ofstream fout2("visit.txt");
+    for (int i = 0; i < humans.size(); i++){
+        if (humans[i]->getType() == "Visitor")
+            fout2 << humans[i]->getId() << endl << humans[i]->getFirstName() << endl << humans[i]->getName() << endl
+            << humans[i]->getSecondName() << endl << humans[i]->getBirthday() << endl << humans[i]->getMonth() << endl
+            << humans[i]->getYear() << endl << humans[i]->getSex() << endl << humans[i]->getAge() << endl
+            << humans[i]->getPhone() << endl << humans[i]->getAdr() << endl;
+    }
+    fout2.close();
+    ofstream fout3("train.txt");
+    for (int i = trains.size() - 1; i < trains.size(); i++){
+         fout3 << trains[i]->getId() << endl << trains[i]->getUsefull() << endl;
+    }
+    fout3.close();
 }
 
 int main()
@@ -704,9 +760,11 @@ int main()
     int count_of_train = 0;
     vector <Human*> humans;
     vector <Train*> trains;
-    //readInfoFromFile(trains, humans, count_of_adm, count_of_ins, count_of_vis, count_of_train);
+    readInfoFromFileAboutHumans(humans, count_of_adm, count_of_ins, count_of_vis);
+    readInfoFromFileAboutTrains(trains, count_of_train);
     //cout << humans.size() << endl;
     while (true){
+        cout << humans.size() << endl;
         cout << "1) Добавление информации в базу данных." << endl;
         cout << "2) Удаление информации из базы данных." << endl;
         cout << "3) Редактирование информации в базе данных." << endl;
@@ -735,9 +793,9 @@ int main()
                                 //Добавление объекта Администратор
                                 for (int i = count_of_adm; i < count_of_adm + 1; i++){
                                     addInfoAboutAdmin(humans);
-                                    writeInfoInFile(trains, humans);
                                 }
                                 count_of_adm++;
+                                writeInfoInFile(trains, humans);
                                 break;
                             case '2':
                                 //Добавление объекта Инструктор
@@ -784,9 +842,11 @@ int main()
                         switch (case2_numb){
                             case '1':
                                 delHumanObj(humans);
+                                reWriteInfoInFile(trains, humans);
                                 break;
                             case '2':
                                 delTrainObj(trains);
+                                reWriteInfoInFile(trains, humans);
                                 break;
                             default:
                                 break;
@@ -809,9 +869,11 @@ int main()
                         switch (case3_numb){
                             case '1':
                                 changeInfoAboutHuman(humans);
+                                reWriteInfoInFile(trains, humans);
                                 break;
                             case '2':
                                 changeInfoAboutTrain(trains);
+                                reWriteInfoInFile(trains, humans);
                                 break;
                             default:
                                 break;
