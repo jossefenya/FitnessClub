@@ -1,9 +1,3 @@
-/*22. Разработка информационно-поисковой системы «Фитнес-клуб»
-Для хранения информации использовать файл. Функционал программы:
-1) добавление информации;
-2) удаление информации;
-3) редактирование информации;
-4) поиск информации по заданным критериям.*/
 #include <iostream>
 #include <string>
 #include <vector>
@@ -201,8 +195,8 @@ public:
 };
 
 //Функции добавления объекта в вектор объектов
-void addInfoAboutAdmin(vector<Human*> &humans){
-    int id = 0;
+void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
+    int id = all_count;
     int64_t salary;
     string first_name;
     string name;
@@ -215,15 +209,53 @@ void addInfoAboutAdmin(vector<Human*> &humans){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
-    cout << "ID Администратора: ";
-    cin >> id;
     cout << endl << "Фамилия Имя Отчество: ";
     cin.get();
     getline(cin, first_name);
+    for (int i = 0; i < first_name.length(); i++){
+        if (first_name[0] >= 97 && first_name[0] <= 122){
+            first_name[0] -= 32;
+            i++;
+        }
+        if (first_name[i] >= 65 && first_name[i] <= 90)
+            first_name[i] += 32;
+    }
     getline(cin, name);
+    for (int i = 0; i < name.length(); i++){
+        if (name[0] >= 97 && name[0] <= 122){
+            name[0] -= 32;
+            i++;
+        }
+        if (name[i] >= 65 && name[i] <= 90)
+            name[i] += 32;
+    }
     getline(cin, second_name);
-    cout << endl << "Дата рождения(ДД.ММ.ГГГГ): ";
-    cin >> birthday >> month_of_birthday >> year_of_birthday;
+    for (int i = 0; i < second_name.length(); i++){
+        if (second_name[0] >= 97 && second_name[0] <= 122){
+            second_name[0] -= 32;
+            i++;
+        }
+        if (second_name[i] >= 65 && second_name[i] <= 90)
+            second_name[i] += 32;
+    }
+    cout << endl << "Дата рождения(ДД.ММ.ГГГГ): " << endl;
+    cout << "День: ";
+    cin >> birthday;
+    if (birthday > 31 || birthday < 1){
+        cout << "Вы введли неверный день, повторите ввод: ";
+        cin >> birthday;
+    }
+    cout << "Месяц: ";
+    cin >> month_of_birthday;
+    if (month_of_birthday > 12 || month_of_birthday < 1){
+        cout << "Вы ввели неверный месяц, повторите ввод: ";
+        cin >> month_of_birthday;
+    }
+    cin >> year_of_birthday;
+    if (year_of_birthday > 2018 || year_of_birthday < 1950){
+        cout << "Вы ввели неверный год, повторите ввод: ";
+        cin >> year_of_birthday;
+    }
     cout << endl << "Пол(М-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
@@ -241,8 +273,8 @@ void addInfoAboutAdmin(vector<Human*> &humans){
     system("clear");
 }
 
-void addInfoAboutIns(vector<Human*> &humans){
-    int id = 0;
+void addInfoAboutIns(vector<Human*> &humans, int& all_count){
+    int id = all_count;
     int64_t salary;
     string first_name;
     string name;
@@ -255,8 +287,6 @@ void addInfoAboutIns(vector<Human*> &humans){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
-    cout << "ID Инструктора: ";
-    cin >> id;
     cout << endl << "Фамилия Имя Отчество: ";
     cin.get();
     getline(cin, first_name);
@@ -280,8 +310,8 @@ void addInfoAboutIns(vector<Human*> &humans){
     system("clear");
 }
 
-void addInfoAboutVis(vector<Human*> &humans){
-    int id = 0;
+void addInfoAboutVis(vector<Human*> &humans, int& all_count){
+    int id = all_count;
     string first_name;
     string name;
     string second_name;
@@ -293,8 +323,6 @@ void addInfoAboutVis(vector<Human*> &humans){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
-    cout << "ID Посетителя: ";
-    cin >> id;
     cout << endl << "Фамилия Имя Отчество: ";
     cin.get();
     getline(cin, first_name);
@@ -317,12 +345,9 @@ void addInfoAboutVis(vector<Human*> &humans){
     system("clear");
 }
 
-void addInfoAboutTrain(vector<Train*> &trains){
-    int id_train = 0;
+void addInfoAboutTrain(vector<Train*> &trains, int& cnt_of_tr){
+    int id_train = cnt_of_tr;
     string usefull = "Yes";
-    cout << "Введите данные" << endl;
-    cout << "ID тренажёра: ";
-    cin >> id_train;
     trains.push_back(new Train(id_train, usefull));
     system("clear");
 }
@@ -613,7 +638,7 @@ void writeInfoInFile(vector<Train*> &trains, vector<Human*> &humans){
     fout.close();
 }
 
-void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int &count_of_ins, int &count_of_vis){
+void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int &count_of_ins, int &count_of_vis, int& all_count){
     int id = 0;
     int64_t salary = 0;
     string first_name;
@@ -646,6 +671,7 @@ void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int 
                 fin.get();
                 humans.push_back(new Administrator(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
                 count_of_adm++;
+                all_count++;
             }
     fin.close();
     file.close();
@@ -669,6 +695,7 @@ void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int 
             fin1.get();
             humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
             count_of_ins++;
+            all_count++;
         }
     fin1.close();
     file1.close();
@@ -691,12 +718,13 @@ void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int 
             fin2.get();
             humans.push_back(new Visitor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address));
             count_of_vis++;
+            all_count++;
         }
     fin2.close();
     file2.close();
 }
 
-void readInfoFromFileAboutTrains(vector<Train*> &trains, int& count_of_train){
+void readInfoFromFileAboutTrains(vector<Train*> &trains, int& count_of_train, int& cnt_of_tr){
     fstream file3("train.txt");
     ifstream fin3("train.txt");
     string usefull;
@@ -709,6 +737,7 @@ void readInfoFromFileAboutTrains(vector<Train*> &trains, int& count_of_train){
             fin3.get();
             trains.push_back(new Train(id_train, usefull));
             count_of_train++;
+            cnt_of_tr++;
         }
     file3.close();
     fin3.close();
@@ -758,13 +787,13 @@ int main()
     int count_of_ins = 0;
     int count_of_vis = 0;
     int count_of_train = 0;
+    int cnt_of_tr = 1;
+    int all_count = 1;
     vector <Human*> humans;
     vector <Train*> trains;
-    readInfoFromFileAboutHumans(humans, count_of_adm, count_of_ins, count_of_vis);
-    readInfoFromFileAboutTrains(trains, count_of_train);
-    //cout << humans.size() << endl;
+    readInfoFromFileAboutHumans(humans, count_of_adm, count_of_ins, count_of_vis, all_count);
+    readInfoFromFileAboutTrains(trains, count_of_train, cnt_of_tr);
     while (true){
-        cout << humans.size() << endl;
         cout << "1) Добавление информации в базу данных." << endl;
         cout << "2) Удаление информации из базы данных." << endl;
         cout << "3) Редактирование информации в базе данных." << endl;
@@ -792,33 +821,37 @@ int main()
                             case '1':
                                 //Добавление объекта Администратор
                                 for (int i = count_of_adm; i < count_of_adm + 1; i++){
-                                    addInfoAboutAdmin(humans);
+                                    addInfoAboutAdmin(humans, all_count);
+                                    writeInfoInFile(trains, humans);
                                 }
                                 count_of_adm++;
-                                writeInfoInFile(trains, humans);
+                                all_count++;
                                 break;
                             case '2':
                                 //Добавление объекта Инструктор
                                 for (int i = count_of_ins; i < count_of_ins + 1; i++){
-                                    addInfoAboutIns(humans);
+                                    addInfoAboutIns(humans, all_count);
                                     writeInfoInFile(trains, humans);
                                 }
+                                all_count++;
                                 count_of_ins++;
                                 break;
                             case '3':
                                 //Добавление объекта
                                 for (int i = count_of_vis; i < count_of_vis + 1; i++){
-                                    addInfoAboutVis(humans);
+                                    addInfoAboutVis(humans, all_count);
                                     writeInfoInFile(trains, humans);
                                 }
+                                all_count++;
                                 count_of_vis++;
                                 break;
                             case '4':
                                 for (int i = count_of_train; i < count_of_train + 1; i++){
-                                    addInfoAboutTrain(trains);
+                                    addInfoAboutTrain(trains, cnt_of_tr);
                                     writeInfoInFile(trains, humans);
                                 }
                                 count_of_train++;
+                                cnt_of_tr++;
                                 break;
                             default:
                                 break;
