@@ -209,7 +209,7 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
-    cout << endl << "Фамилия Имя Отчество: ";
+    cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
     for (int i = 0; i < first_name.length(); i++){
@@ -219,6 +219,9 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
         }
         if (first_name[i] >= 65 && first_name[i] <= 90)
             first_name[i] += 32;
+        if (first_name[i] < 65 || first_name[i] > 90 && first_name[i] < 97 || first_name[i] > 122){
+            first_name[i] = 96;
+        }
     }
     getline(cin, name);
     for (int i = 0; i < name.length(); i++){
@@ -228,6 +231,9 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
         }
         if (name[i] >= 65 && name[i] <= 90)
             name[i] += 32;
+        if (name[i] < 65 || name[i] > 90 && name[i] < 97 || name[i] > 122){
+            name[i] = 96;
+        }
     }
     getline(cin, second_name);
     for (int i = 0; i < second_name.length(); i++){
@@ -237,35 +243,53 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
         }
         if (second_name[i] >= 65 && second_name[i] <= 90)
             second_name[i] += 32;
+        if (second_name[i] < 65 || second_name[i] > 90 && second_name[i] < 97 || second_name[i] > 122){
+            second_name[i] = 96;
+        }
     }
     cout << endl << "Дата рождения(ДД.ММ.ГГГГ): " << endl;
     cout << "День: ";
     cin >> birthday;
     if (birthday > 31 || birthday < 1){
-        cout << "Вы введли неверный день, повторите ввод: ";
+        cout << "Вы ввели неверные данные, повторите ввод: ";
         cin >> birthday;
     }
     cout << "Месяц: ";
     cin >> month_of_birthday;
     if (month_of_birthday > 12 || month_of_birthday < 1){
-        cout << "Вы ввели неверный месяц, повторите ввод: ";
+        cout << "Вы ввели неверные данные, повторите ввод: ";
         cin >> month_of_birthday;
     }
+    cout << "Год: ";
     cin >> year_of_birthday;
     if (year_of_birthday > 2018 || year_of_birthday < 1950){
-        cout << "Вы ввели неверный год, повторите ввод: ";
+        cout << "Вы ввели неверные данные, повторите ввод: ";
         cin >> year_of_birthday;
     }
-    cout << endl << "Пол(М-Мужской, F-Женский): ";
+    cout << endl << "Пол(М(1)-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
+    if (sex != "m" && sex != "M" && sex != "f" && sex != "F" && sex != "1"){
+        sex = "f";
+    }
+    else if (sex == "1")
+        sex = "m";
     cout << endl << "Возраст: ";
     cin >> age;
     cout << endl << "Телефонный номер: ";
     cin >> phone_number;
-    cout << endl << "Адрес: ";
+    cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, address);
+    for (int i = 0; i < address.length(); i++){
+        if (address[0] >= 97 && address[0] <= 122){
+            address[0] -= 32;
+            i++;
+        }
+        if (address[i] < 65 || address[i] > 90 && address[i] < 97 || address[i] > 122){
+            address[i] = 96;
+        }
+    }
     cout << endl;
     cout << "Зарплата: ";
     cin >> salary;
@@ -287,24 +311,89 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
-    cout << endl << "Фамилия Имя Отчество: ";
+    cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
+    for (int i = 0; i < first_name.length(); i++){
+        if (first_name[0] >= 97 && first_name[0] <= 122){
+            first_name[0] -= 32;
+            i++;
+        }
+        if (first_name[i] >= 65 && first_name[i] <= 90)
+            first_name[i] += 32;
+        if (first_name[i] < 65 || first_name[i] > 90 && first_name[i] < 97 || first_name[i] > 122){
+            first_name[i] = 96;
+        }
+    }
     getline(cin, name);
+    for (int i = 0; i < name.length(); i++){
+        if (name[0] >= 97 && name[0] <= 122){
+            name[0] -= 32;
+            i++;
+        }
+        if (name[i] >= 65 && name[i] <= 90)
+            name[i] += 32;
+        if (name[i] < 65 || name[i] > 90 && name[i] < 97 || name[i] > 122){
+            name[i] = 96;
+        }
+    }
     getline(cin, second_name);
-    cout << endl << "Дата рождения(ДД.ММ.ГГГГ): ";
-    cin >> birthday >> month_of_birthday >> year_of_birthday;
-    cout << endl << "Пол(М-Мужской, F-Женский): ";
+    for (int i = 0; i < second_name.length(); i++){
+        if (second_name[0] >= 97 && second_name[0] <= 122){
+            second_name[0] -= 32;
+            i++;
+        }
+        if (second_name[i] >= 65 && second_name[i] <= 90)
+            second_name[i] += 32;
+        if (second_name[i] < 65 || second_name[i] > 90 && second_name[i] < 97 || second_name[i] > 122){
+            second_name[i] = 96;
+        }
+    }
+    cout << endl << "Дата рождения(ДД.ММ.ГГГГ): " << endl;
+    cout << "День: ";
+    cin >> birthday;
+    if (birthday > 31 || birthday < 1){
+        cout << "Вы ввели неверные данные, повторите ввод: ";
+        cin >> birthday;
+    }
+    cout << "Месяц: ";
+    cin >> month_of_birthday;
+    if (month_of_birthday > 12 || month_of_birthday < 1){
+        cout << "Вы ввели неверные данные, повторите ввод: ";
+        cin >> month_of_birthday;
+    }
+    cout << "Год: ";
+    cin >> year_of_birthday;
+    if (year_of_birthday > 2018 || year_of_birthday < 1950){
+        cout << "Вы ввели неверные данные, повторите ввод: ";
+        cin >> year_of_birthday;
+    }
+    cout << endl << "Пол(М(1)-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
+    if (sex != "m" && sex != "M" && sex != "f" && sex != "F" && sex != "1"){
+        sex = "f";
+    }
+    else if (sex == "1")
+        sex = "m";
     cout << endl << "Возраст: ";
     cin >> age;
     cout << endl << "Телефонный номер: ";
     cin >> phone_number;
-    cout << endl << "Адрес: ";
+    cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, address);
-    cout << endl << "Зарплата: ";
+    for (int i = 0; i < address.length(); i++){
+        if (address[0] >= 97 && address[0] <= 122){
+            address[0] -= 32;
+            i++;
+        }
+        if (address[i] < 65 || address[i] > 90 && address[i] < 97 || address[i] > 122){
+            address[i] = 96;
+        }
+    }
+    cout << endl;
+    cout << "Зарплата: ";
     cin >> salary;
     humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
     system("clear");
@@ -323,23 +412,87 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
-    cout << endl << "Фамилия Имя Отчество: ";
+    cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
+    for (int i = 0; i < first_name.length(); i++){
+        if (first_name[0] >= 97 && first_name[0] <= 122){
+            first_name[0] -= 32;
+            i++;
+        }
+        if (first_name[i] >= 65 && first_name[i] <= 90)
+            first_name[i] += 32;
+        if (first_name[i] < 65 || first_name[i] > 90 && first_name[i] < 97 || first_name[i] > 122){
+            first_name[i] = 96;
+        }
+    }
     getline(cin, name);
+    for (int i = 0; i < name.length(); i++){
+        if (name[0] >= 97 && name[0] <= 122){
+            name[0] -= 32;
+            i++;
+        }
+        if (name[i] >= 65 && name[i] <= 90)
+            name[i] += 32;
+        if (name[i] < 65 || name[i] > 90 && name[i] < 97 || name[i] > 122){
+            name[i] = 96;
+        }
+    }
     getline(cin, second_name);
-    cout << endl << "Дата рождения(ДД.ММ.ГГГГ): ";
-    cin >> birthday >> month_of_birthday >> year_of_birthday;
-    cout << endl << "Пол(М-Мужской, F-Женский): ";
+    for (int i = 0; i < second_name.length(); i++){
+        if (second_name[0] >= 97 && second_name[0] <= 122){
+            second_name[0] -= 32;
+            i++;
+        }
+        if (second_name[i] >= 65 && second_name[i] <= 90)
+            second_name[i] += 32;
+        if (second_name[i] < 65 || second_name[i] > 90 && second_name[i] < 97 || second_name[i] > 122){
+            second_name[i] = 96;
+        }
+    }
+    cout << endl << "Дата рождения(ДД.ММ.ГГГГ): " << endl;
+    cout << "День: ";
+    cin >> birthday;
+    if (birthday > 31 || birthday < 1){
+        cout << "Вы ввели неверные данные, повторите ввод: ";
+        cin >> birthday;
+    }
+    cout << "Месяц: ";
+    cin >> month_of_birthday;
+    if (month_of_birthday > 12 || month_of_birthday < 1){
+        cout << "Вы ввели неверные данные, повторите ввод: ";
+        cin >> month_of_birthday;
+    }
+    cout << "Год: ";
+    cin >> year_of_birthday;
+    if (year_of_birthday > 2018 || year_of_birthday < 1950){
+        cout << "Вы ввели неверные данные, повторите ввод: ";
+        cin >> year_of_birthday;
+    }
+    cout << endl << "Пол(М(1)-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
+    if (sex != "m" && sex != "M" && sex != "f" && sex != "F" && sex != "1"){
+        sex = "f";
+    }
+    else if (sex == "1")
+        sex = "m";
     cout << endl << "Возраст: ";
     cin >> age;
     cout << endl << "Телефонный номер: ";
     cin >> phone_number;
-    cout << endl << "Адрес: ";
+    cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, address);
+    for (int i = 0; i < address.length(); i++){
+        if (address[0] >= 97 && address[0] <= 122){
+            address[0] -= 32;
+            i++;
+        }
+        if (address[i] < 65 || address[i] > 90 && address[i] < 97 || address[i] > 122){
+            address[i] = 96;
+        }
+    }
     cout << endl;
     humans.push_back(new Visitor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address));
     system("clear");
@@ -401,7 +554,7 @@ void delTrainObj(vector<Train*> &trains){
 void changeInfoAboutHuman(vector<Human*> &humans){
     cout << "ID данных, доступных для изменения:" << endl;
     for (int i = 0; i < humans.size(); i++){
-        cout << humans[i]->getId() << endl;
+        cout << humans[i]->getId() << " - "<< humans[i]->getType() << endl;
     }
     cout << "Введите ID для изменения данных: ";
     int id_for_change;
@@ -428,10 +581,19 @@ void changeInfoAboutHuman(vector<Human*> &humans){
             cout << "Хотите изменить адрес?(y-да или n-нет): ";
             cin >> ch;
             if (ch == 'y'){
-                cout << "Введите новый Адрес: ";
+                cout << "Введите новый Адрес(Все неверные символы будут заменены на символ '): ";
                 string address;
                 cin.get();
                 getline(cin, address);
+                for (int i = 0; i < address.length(); i++){
+                    if (address[0] >= 97 && address[0] <= 122){
+                        address[0] -= 32;
+                        i++;
+                    }
+                    if (address[i] < 65 || address[i] > 90 && address[i] < 97 || address[i] > 122){
+                        address[i] = 96;
+                    }
+                }
                 humans[i]->setAddress(address);
             }
             if (humans[i]->getType() == "Administrator" || humans[i]->getType() == "Instructor"){
@@ -463,7 +625,7 @@ void changeInfoAboutTrain(vector<Train*> &trains){
         cout << "Хотите изменить данные об исправности?(y-да или n-нет): ";
         cin >> ch;
         if (ch == 'y'){
-            cout << "Введите новые данные об исправности: ";
+            cout << "Введите новые данные об исправности(Yes-работает, No-не работает): ";
             string usefull;
             cin.get();
             getline(cin, usefull);
@@ -604,7 +766,7 @@ void searchUselessTrain(vector<Train*> &trains){
 }
 
 //Работа с файлами
-void writeInfoInFile(vector<Train*> &trains, vector<Human*> &humans){
+void writeInfoInFile(vector<Human*> &humans){
     for (int i = humans.size() - 1; i < humans.size(); i++){
         if (humans[i]->getType() == "Administrator"){
             ofstream fout("admin.txt", ios_base::app);
@@ -631,11 +793,14 @@ void writeInfoInFile(vector<Train*> &trains, vector<Human*> &humans){
             fout.close();
         }
     }
-    ofstream fout("train.txt", ios_base::app);
+}
+
+void writeInf(vector<Train*> &trains){
     for (int i = trains.size() - 1; i < trains.size(); i++){
-         fout << trains[i]->getId() << endl << trains[i]->getUsefull() << endl;
+        ofstream fout("train.txt", ios_base::app);
+        fout << trains[i]->getId() << endl << trains[i]->getUsefull() << endl;
+        fout.close();
     }
-    fout.close();
 }
 
 void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int &count_of_ins, int &count_of_vis, int& all_count){
@@ -822,7 +987,7 @@ int main()
                                 //Добавление объекта Администратор
                                 for (int i = count_of_adm; i < count_of_adm + 1; i++){
                                     addInfoAboutAdmin(humans, all_count);
-                                    writeInfoInFile(trains, humans);
+                                    writeInfoInFile(humans);
                                 }
                                 count_of_adm++;
                                 all_count++;
@@ -831,7 +996,7 @@ int main()
                                 //Добавление объекта Инструктор
                                 for (int i = count_of_ins; i < count_of_ins + 1; i++){
                                     addInfoAboutIns(humans, all_count);
-                                    writeInfoInFile(trains, humans);
+                                    writeInfoInFile(humans);
                                 }
                                 all_count++;
                                 count_of_ins++;
@@ -840,7 +1005,7 @@ int main()
                                 //Добавление объекта
                                 for (int i = count_of_vis; i < count_of_vis + 1; i++){
                                     addInfoAboutVis(humans, all_count);
-                                    writeInfoInFile(trains, humans);
+                                    writeInfoInFile(humans);
                                 }
                                 all_count++;
                                 count_of_vis++;
@@ -848,7 +1013,7 @@ int main()
                             case '4':
                                 for (int i = count_of_train; i < count_of_train + 1; i++){
                                     addInfoAboutTrain(trains, cnt_of_tr);
-                                    writeInfoInFile(trains, humans);
+                                    writeInf(trains);
                                 }
                                 count_of_train++;
                                 cnt_of_tr++;
