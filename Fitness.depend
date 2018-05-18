@@ -1,5 +1,22 @@
 # depslib dependency file v1.0
-1525166206 source:/home/jossy/C++/Fitness/main.cpp
+1525691065 source:/home/jossy/C++/Fitness/main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<fstream>
+	<unistd.h>
+	"func.h"
+	"classes.h"
+
+1525514758 /home/jossy/C++/Fitness/func.h
+	<iostream>
+	<string>
+	<vector>
+	<fstream>
+	<unistd.h>
+	"classes.h"
+
+1525178953 /home/jossy/C++/Fitness/classes.h
 	<iostream>
 	<string>
 	<vector>

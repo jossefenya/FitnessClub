@@ -24,9 +24,14 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
+    cout << "ESC для отмены" << endl;
     cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
+    if ((int)first_name[0] == 27){
+        system("clear");
+        return;
+    }
     for (int i = 0; i < first_name.length(); i++){
         if (first_name[0] >= 97 && first_name[0] <= 122){
             first_name[0] -= 32;
@@ -39,6 +44,10 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
         }
     }
     getline(cin, name);
+    if ((int)name[0] == 27){
+        system("clear");
+        return;        
+    }
     for (int i = 0; i < name.length(); i++){
         if (name[0] >= 97 && name[0] <= 122){
             name[0] -= 32;
@@ -51,6 +60,10 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
         }
     }
     getline(cin, second_name);
+    if ((int)second_name[0] == 27){
+        system("clear");
+        return;
+    }
     for (int i = 0; i < second_name.length(); i++){
         if (second_name[0] >= 97 && second_name[0] <= 122){
             second_name[0] -= 32;
@@ -84,6 +97,10 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
     cout << endl << "Пол(М(1)-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
+    if (sex[0] == 27){
+        system("clear");
+        return;        
+    }
     if (sex != "m" && sex != "M" && sex != "f" && sex != "F" && sex != "1"){
         sex = "f";
     }
@@ -96,6 +113,10 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
     cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, address);
+    if (address[0] == 27){
+        system("clear");
+        return;        
+    }
     for (int i = 0; i < address.length(); i++){
         if (address[0] >= 97 && address[0] <= 122){
             address[0] -= 32;
@@ -126,9 +147,14 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
     int64_t phone_number;
     string address;
     cout << "Введите данные" << endl;
+    cout << "ESC для отмены" << endl;
     cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
+    if ((int)first_name[0] == 27){
+        system("clear");
+        return;
+    }
     for (int i = 0; i < first_name.length(); i++){
         if (first_name[0] >= 97 && first_name[0] <= 122){
             first_name[0] -= 32;
@@ -141,6 +167,10 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
         }
     }
     getline(cin, name);
+    if ((int)name[0] == 27){
+        system("clear");
+        return;        
+    }
     for (int i = 0; i < name.length(); i++){
         if (name[0] >= 97 && name[0] <= 122){
             name[0] -= 32;
@@ -153,6 +183,10 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
         }
     }
     getline(cin, second_name);
+    if ((int)second_name[0] == 27){
+        system("clear");
+        return;
+    }
     for (int i = 0; i < second_name.length(); i++){
         if (second_name[0] >= 97 && second_name[0] <= 122){
             second_name[0] -= 32;
@@ -186,6 +220,10 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
     cout << endl << "Пол(М(1)-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
+    if (sex[0] == 27){
+        system("clear");
+        return;        
+    }
     if (sex != "m" && sex != "M" && sex != "f" && sex != "F" && sex != "1"){
         sex = "f";
     }
@@ -198,6 +236,10 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
     cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, address);
+    if (address[0] == 27){
+        system("clear");
+        return;        
+    }
     for (int i = 0; i < address.length(); i++){
         if (address[0] >= 97 && address[0] <= 122){
             address[0] -= 32;
@@ -230,6 +272,10 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
     cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
+    if (first_name[0] == 27){
+        system("clear");
+        return;
+    }
     for (int i = 0; i < first_name.length(); i++){
         if (first_name[0] >= 97 && first_name[0] <= 122){
             first_name[0] -= 32;
@@ -242,6 +288,10 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
         }
     }
     getline(cin, name);
+    if (name[0] == 27){
+        system("clear");
+        return;
+    }    
     for (int i = 0; i < name.length(); i++){
         if (name[0] >= 97 && name[0] <= 122){
             name[0] -= 32;
@@ -254,6 +304,10 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
         }
     }
     getline(cin, second_name);
+    if (second_name[0] == 27){
+        system("clear");
+        return;
+    }    
     for (int i = 0; i < second_name.length(); i++){
         if (second_name[0] >= 97 && second_name[0] <= 122){
             second_name[0] -= 32;
@@ -287,6 +341,10 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
     cout << endl << "Пол(М(1)-Мужской, F-Женский): ";
     cin.get();
     getline(cin, sex);
+    if (sex[0] == 27){
+        system("clear");
+        return;
+    }    
     if (sex != "m" && sex != "M" && sex != "f" && sex != "F" && sex != "1"){
         sex = "f";
     }
@@ -299,6 +357,10 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
     cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, address);
+    if (address[0] == 27){
+        system("clear");
+        return;
+    }    
     for (int i = 0; i < address.length(); i++){
         if (address[0] >= 97 && address[0] <= 122){
             address[0] -= 32;
@@ -820,73 +882,70 @@ void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int 
     string address;
     fstream file("admin.txt");
     ifstream fin("admin.txt");
-    if (file.peek() != EOF)
-        while(!fin.eof()){
-                fin >> id;
-                fin >> first_name;
-                fin >> name;
-                fin >> second_name;
-                fin >> birthday;
-                fin >> month_of_birthday;
-                fin >> year_of_birthday;
-                fin >> sex;
-                fin >> age;
-                fin >> phone_number;
-                fin >> address;
-                fin >> salary;
-                fin.get();
-                fin.get();
-                humans.push_back(new Administrator(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
-                count_of_adm++;
-                all_count++;
-            }
+    while(!fin.eof()){
+            fin >> id;
+            fin >> first_name;
+            fin >> name;
+            fin >> second_name;
+            fin >> birthday;
+            fin >> month_of_birthday;
+            fin >> year_of_birthday;
+            fin >> sex;
+            fin >> age;
+            fin >> phone_number;
+            fin >> address;
+            fin >> salary;
+            humans.push_back(new Administrator(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
+            count_of_adm++;
+            all_count++;
+        }
+    if (humans.size() != 0)
+        humans.erase(humans.end() - 1);
     fin.close();
     file.close();
     ifstream fin1("instruct.txt");
     fstream file1("instruct.txt");
-    if (file1.peek() != EOF)
-        while (!fin1.eof()){
-            fin1 >> id;
-            fin1 >> first_name;
-            fin1 >> name;
-            fin1 >> second_name;
-            fin1 >> birthday;
-            fin1 >> month_of_birthday;
-            fin1 >> year_of_birthday;
-            fin1 >> sex;
-            fin1 >> age;
-            fin1 >> phone_number;
-            fin1 >> address;
-            fin1 >> salary ;
-            fin1.get();
-            fin1.get();
-            humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
-            count_of_ins++;
-            all_count++;
-        }
+    while (!fin1.eof()){
+        fin1 >> id;
+        fin1 >> first_name;
+        fin1 >> name;
+        fin1 >> second_name;
+        fin1 >> birthday;
+        fin1 >> month_of_birthday;
+        fin1 >> year_of_birthday;
+        fin1 >> sex;
+        fin1 >> age;
+        fin1 >> phone_number;
+        fin1 >> address;
+        fin1 >> salary ;
+        humans.push_back(new Instructor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address, salary));
+        count_of_ins++;
+        all_count++;
+    }
+    if (humans.size() != 0)
+        humans.erase(humans.end() - 1);
     fin1.close();
     file1.close();
     ifstream fin2("visit.txt");
     fstream file2("visit.txt");
-    if (file2.peek() != EOF)
-        while (!fin2.eof()){
-            fin2 >> id;
-            fin2 >> first_name;
-            fin2 >> name;
-            fin2 >> second_name;
-            fin2 >> birthday;
-            fin2 >> month_of_birthday;
-            fin2 >> year_of_birthday;
-            fin2 >> sex;
-            fin2 >> age;
-            fin2 >> phone_number;
-            fin2 >> address;
-            fin2.get();
-            fin2.get();
-            humans.push_back(new Visitor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address));
-            count_of_vis++;
-            all_count++;
-        }
+    while (!fin2.eof()){
+        fin2 >> id;
+        fin2 >> first_name;
+        fin2 >> name;
+        fin2 >> second_name;
+        fin2 >> birthday;
+        fin2 >> month_of_birthday;
+        fin2 >> year_of_birthday;
+        fin2 >> sex;
+        fin2 >> age;
+        fin2 >> phone_number;
+        fin2 >> address;
+        humans.push_back(new Visitor(id, first_name, name, second_name, birthday, month_of_birthday, year_of_birthday, sex, age, phone_number, address));
+        count_of_vis++;
+        all_count++;
+    }
+    if (humans.size() != 0)
+        humans.erase(humans.end() - 1);
     fin2.close();
     file2.close();
 }
@@ -900,8 +959,6 @@ void readInfoFromFileAboutTrains(vector<Train*> &trains, int& count_of_train, in
         while (!fin3.eof()){
             fin3 >> id_train;
             fin3 >> usefull;
-            fin3.get();
-            fin3.get();
             trains.push_back(new Train(id_train, usefull));
             count_of_train++;
             cnt_of_tr++;
