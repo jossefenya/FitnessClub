@@ -20,14 +20,14 @@ protected:
     int year_of_birthday;
     string sex;
     int age;
-    int64_t phone_number;
+    string phone_number;
     string address;
 public:
     Human(){}
 
     Human(int id1, string first_name1, string name1, string second_name1,
           int birthday1, int month_of_birthday1, int year_of_birthday1,
-           string sex1, int age1, int64_t phone_number1, string address1){
+           string sex1, int age1, string phone_number1, string address1){
             id = id1;
             first_name = first_name1;
             name = name1;
@@ -69,7 +69,7 @@ public:
 
     virtual string getSex(){return sex;}
 
-    virtual int64_t getPhone(){return phone_number;}
+    virtual string getPhone(){return phone_number;}
 
     virtual string getAdr(){return address;}
 
@@ -77,7 +77,7 @@ public:
 
     virtual void setAge(int age1){age = age1;}
 
-    virtual void setPhoneNumber(int64_t phone_number1){phone_number = phone_number1;}
+    virtual void setPhoneNumber(string phone_number1){phone_number = phone_number1;}
 
     virtual void setAddress(string address1){address = address1;}
 
@@ -98,7 +98,7 @@ private:
 public:
     Administrator(int id1, string first_name1, string name1, string second_name1,
           int birthday1, int month_of_birthday1, int year_of_birthday1,
-           string sex1, int age1, int64_t phone_number1, string address1, int64_t salary1)
+           string sex1, int age1, string phone_number1, string address1, int64_t salary1)
            : Human(id1, first_name1, name1, second_name1, birthday1, month_of_birthday1, year_of_birthday1, sex1, age1, phone_number1, address1){
                 salary = salary1;
            }
@@ -131,7 +131,7 @@ public:
 
     Instructor(int id1, string first_name1, string name1, string second_name1,
           int birthday1, int month_of_birthday1, int year_of_birthday1,
-           string sex1, int age1, int64_t phone_number1, string address1, int64_t salary1)
+           string sex1, int age1, string phone_number1, string address1, int64_t salary1)
            : Human(id1, first_name1, name1, second_name1, birthday1, month_of_birthday1, year_of_birthday1, sex1, age1, phone_number1, address1){
                 salary = salary1;
            }
@@ -146,6 +146,11 @@ public:
 
     string getType(){return type;}
 
+    void setSalary(int64_t salary1){
+        Human::setSalary(salary1);
+        salary = salary1;
+    }
+
     int64_t getSalary(){return salary;}
 };
 
@@ -158,7 +163,7 @@ public:
 
     Visitor(int id1, string first_name1, string name1, string second_name1,
           int birthday1, int month_of_birthday1, int year_of_birthday1,
-           string sex1, int age1, int64_t phone_number1, string address1)
+           string sex1, int age1, string phone_number1, string address1)
            : Human(id1, first_name1, name1, second_name1, birthday1, month_of_birthday1, year_of_birthday1, sex1, age1, phone_number1, address1){}
 
     void showInfo(){

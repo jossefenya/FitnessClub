@@ -6,7 +6,6 @@
 #include <fstream>
 #include <unistd.h>
 #include "classes.h"
-
 using namespace std;
 
 //Функции добавления объекта в вектор объектов
@@ -21,7 +20,7 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
     int year_of_birthday;
     string sex;
     int age;
-    int64_t phone_number;
+    string phone_number;
     string address;
     cout << "Введите данные" << endl;
     cout << "ESC для отмены" << endl;
@@ -109,6 +108,7 @@ void addInfoAboutAdmin(vector<Human*> &humans, int& all_count){
     cout << endl << "Возраст: ";
     cin >> age;
     cout << endl << "Телефонный номер: ";
+    cin.get();
     cin >> phone_number;
     cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
@@ -144,7 +144,7 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
     int year_of_birthday;
     string sex;
     int age;
-    int64_t phone_number;
+    string phone_number;
     string address;
     cout << "Введите данные" << endl;
     cout << "ESC для отмены" << endl;
@@ -232,6 +232,7 @@ void addInfoAboutIns(vector<Human*> &humans, int& all_count){
     cout << endl << "Возраст: ";
     cin >> age;
     cout << endl << "Телефонный номер: ";
+    cin.get();
     cin >> phone_number;
     cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
@@ -266,9 +267,10 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
     int year_of_birthday;
     string sex;
     int age;
-    int64_t phone_number;
+    string phone_number;
     string address;
     cout << "Введите данные" << endl;
+    cout << "ESC для отмены" << endl;
     cout << endl << "Фамилия Имя Отчество(Все неверные символы будут заменены на символ '): ";
     cin.get();
     getline(cin, first_name);
@@ -353,6 +355,7 @@ void addInfoAboutVis(vector<Human*> &humans, int& all_count){
     cout << endl << "Возраст: ";
     cin >> age;
     cout << endl << "Телефонный номер: ";
+    cin.get();
     cin >> phone_number;
     cout << endl << "Адрес(Все неверные символы будут заменены на символ '): ";
     cin.get();
@@ -485,7 +488,7 @@ void changeInfoAboutHuman(vector<Human*> &humans){
                 cin >> ch;
                 if (ch == 'y'){
                     cout << "Введите новый телефонный номер: ";
-                    int64_t phone_number;
+                    string phone_number;
                     cin >> phone_number;
                     humans[i]->setPhoneNumber(phone_number);
                 }
@@ -878,7 +881,7 @@ void readInfoFromFileAboutHumans(vector<Human*> &humans, int &count_of_adm, int 
     int year_of_birthday;
     string sex;
     int age;
-    int64_t phone_number;
+    string phone_number;
     string address;
     fstream file("admin.txt");
     ifstream fin("admin.txt");
@@ -963,6 +966,8 @@ void readInfoFromFileAboutTrains(vector<Train*> &trains, int& count_of_train, in
             count_of_train++;
             cnt_of_tr++;
         }
+    if (trains.size() != 0)
+        trains.erase(trains.end() - 1);
     file3.close();
     fin3.close();
 }
